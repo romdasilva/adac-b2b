@@ -34,10 +34,12 @@ class PageTest extends DuskTestCase
                     ->pause(1200)
                     ->screenshot($dir . 'test2');
 
+                
                 //navigate through all pages.
                 $pages = $browser->elements('.pagination a');
-                $i = 1;
-                for ($i = 1; $i < (sizeof($pages)) - 1; $i++) {
+                $size=sizeof($pages)/2;
+                //$i = 1;
+                for ($i = 0; $i <$size; $i++) {
                     if ($i > 1) {
                         $pages[$i]->click();
                         $browser->screenshot($dir . 'page-' . $i);
@@ -214,7 +216,7 @@ class PageTest extends DuskTestCase
                     ->pause(100)
                     ->clickLink('Firma')
                     ->screenshot($dir . 'Firma');
-
+                    $browser->assertDontSee('t::');
                 //click through all pages.
                 $pages = $browser->elements('.paginate_button  a');
                 for ($i = 0; $i < (sizeof($pages)) - 1; $i++) {

@@ -87,6 +87,8 @@ class MenuTest extends DuskTestCase
                 $app_url = "https://demo.b2b-fahrsicherheit.de/";
                 $browser->clickLink('Trainingsangebote')
                     ->pause(1000);
+                    $browser->clickLink('Trainingsangebote')
+                    ->pause(1000);
                 $pages = $browser->elements('.panel-default a');
                 $prepared_link = array();
                 foreach ($pages as $page) {
