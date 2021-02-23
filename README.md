@@ -1,15 +1,21 @@
 # README #
 
-Instalation
-chrome driver should be same version as browser version.
+# Instalation #
+* install dusk on laravel
+php artisan dusk:install
+* to run test 
+* Chrome driver should be same version as browser version.
 php artisan dusk:chrome-driver 86
 
-Runing test
-
-for runing specific test.
+# Runing test #
+* To run all tests.
+php artisan dusk
+* To run specifictest.
 php artisan dusk --filter testTrainingLocations
-for runinng group test
+* To run group test.
 php artisan dusk --group All
+php artisan dusk --group Menu
+
 
 This README would normally document whatever steps are necessary to get your application up and running.
 
