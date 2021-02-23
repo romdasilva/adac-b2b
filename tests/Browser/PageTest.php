@@ -9,7 +9,8 @@ use Tests\Browse;
 
 class PageTest extends DuskTestCase
 {
-
+    private $title = "";
+    private $scope="";
     public function Login()
     {
         $Logging_user = new LoginTest;
@@ -18,7 +19,7 @@ class PageTest extends DuskTestCase
 
 
     /**  
-     * @group All
+     * @group Alls
      * @group TrainingLocations
      */
     public function testTrainingLocations()
@@ -29,20 +30,24 @@ class PageTest extends DuskTestCase
                 $app_url = "https://demo.b2b-fahrsicherheit.de/";
                 $dir = 'adac-' . date("Y-m-d-H") . '/Trainingsstandorte' . '/';
                 $browser->visit('/trainingsstandorte')
-                //clickLink('Trainingsstandorte')
+                    //clickLink('Trainingsstandorte')
                     ->resize(1920, 3000)
                     ->pause(1200)
-                    ->screenshot($dir . 'test2');
-
-                
+                    ->screenshot($dir . 'Trainingsstandorte');
+                    $this->title =  'Trainingsstandorte';
+                    $this->scope='.main-container';
+                    $this->validate();
                 //navigate through all pages.
                 $pages = $browser->elements('.pagination a');
-                $size=sizeof($pages)/2;
+                $size = sizeof($pages) / 2;
                 //$i = 1;
-                for ($i = 0; $i <$size; $i++) {
+                for ($i = 0; $i < $size; $i++) {
                     if ($i > 1) {
                         $pages[$i]->click();
                         $browser->screenshot($dir . 'page-' . $i);
+                        $this->title =  'page-' . $i;
+                        $this->scope='.main-container';
+                        $this->validate();
                         $pages = $browser->elements('.pagination a');
                     }
                 }
@@ -60,6 +65,9 @@ class PageTest extends DuskTestCase
                             ->pause(200)
                             ->resize(1920, 2500)
                             ->screenshot($dir . 'step-' . $j . str_replace('/', '-', $link));
+                            $this->title =  'step-' . $j . str_replace('/', '-', $link);
+                            $this->scope='.main-container';
+                            $this->validate();
                     }
                     $j++;
                 }
@@ -85,9 +93,11 @@ class PageTest extends DuskTestCase
                     ->pause(1000)
                     ->clickAtXPath('/html/body/div[2]/div[3]/div/div[1]/nav/div/div[1]/div/div[6]/div[1]/a')
                     ->pause(100)
-                    ->screenshot($dir . 'tarinings')
                     ->clickLink('Buchungen')
                     ->screenshot($dir . 'Buchungen');
+                    $this->title = 'Buchungen';
+                    $this->scope='.main-nav-left';
+                    $this->validate();
 
                 $tabs = $browser->elements('.pgm-datatable-column-toggle-DT_bookings span');
                 $j = 1;
@@ -110,6 +120,9 @@ class PageTest extends DuskTestCase
                     if ($i > 1) {
                         $pages[$i]->click();
                         $browser->screenshot($dir . 'page-' . $i);
+                        $this->title =  'page-' . $i;
+                        $this->scope='.main-container';
+                        $this->validate();
                         //update element position.
                         $pages = $browser->elements('.paginate_button  a');
                     }
@@ -135,12 +148,21 @@ class PageTest extends DuskTestCase
                     ->clickLink('Projekte')
                     ->screenshot($dir . 'Project')
                     ->clickLink('Alle Projekte')
-                    ->screenshot($dir . 'All-Projects')
-                    ->clickAtXPath('/html/body/div[2]/div[3]/div/div[2]/div/div[3]/div/div/div[1]/div[2]/a[2]')
-                    ->screenshot($dir . 'New-project')
-                    ->clickAtXPath('/html/body/div[2]/div[3]/div/div[2]/div/div[3]/div/div/div/div/div[2]/div/div[2]/div[2]/a/span/span')
+                    ->screenshot($dir . 'All-Projects');
+                    $this->title = 'All-Projects';
+                    $this->scope='.main-nav-left';
+                    $this->validate();
+                $browser->clickAtXPath('/html/body/div[2]/div[3]/div/div[2]/div/div[3]/div/div/div[1]/div[2]/a[2]')
+                    ->screenshot($dir . 'New-project');
+                    $this->title = 'All-Projects';
+                    $this->scope='.main-container';
+                    $this->validate();
+                $browser->clickAtXPath('/html/body/div[2]/div[3]/div/div[2]/div/div[3]/div/div/div/div/div[2]/div/div[2]/div[2]/a/span/span')
                     ->pause(1000)
                     ->screenshot($dir . 'Close-window');
+                    $this->title = 'Close-window';
+                    $this->scope='.main-container';
+                    $this->validate();
 
                 //click through all pages.
                 $pages = $browser->elements('.paginate_button  a');
@@ -148,6 +170,9 @@ class PageTest extends DuskTestCase
                     if ($i > 1) {
                         $pages[$i]->click();
                         $browser->screenshot($dir . 'page-' . $i);
+                        $this->title = 'page-' . $i;
+                        $this->scope='.portlet-body';
+                        $this->validate();
                         //update element position.
                         $pages = $browser->elements('.paginate_button  a');
                     }
@@ -168,6 +193,7 @@ class PageTest extends DuskTestCase
         $this->browse(
             function ($browser) {
                 $dir = 'adac-' . date("Y-m-d-H") . '/Setting/';
+                $this->dir = $dir;
                 $app_url = "https://demo.b2b-fahrsicherheit.de/";
                 $browser->visit('/');
                 $browser->clickLink('Trainingsangebote')
@@ -175,21 +201,34 @@ class PageTest extends DuskTestCase
                     ->clickLink('Einstellungen')
                     ->screenshot($dir . 'settings')
                     ->pause(100)
-                    ->clickLink('Firma')
-                    ->screenshot($dir . 'Firma')
-                    ->clickAtXPath('/html/body/div[2]/div[3]/div/div[2]/div/div[3]/div/div/div[1]/div[2]/a[2]')
+                    ->clickLink('Firma');
+                $this->title = 'Firma';
+                $this->scope='.main-nav-left';
+                $this->validate();
+                // ->screenshot($dir . 'Firma')
+                $browser->clickAtXPath('/html/body/div[2]/div[3]/div/div[2]/div/div[3]/div/div/div[1]/div[2]/a[2]')
                     ->pause(300)
-                    ->screenshot($dir . 'Add new')
-                    ->clickAtXPath('/html/body/div[8]/div[2]/div/div/div[3]/a[2]/span')
-                    ->screenshot($dir . 'Close window')
-                    ->pause(300)
+                    ->screenshot($dir . 'Add new');
+                     
+                     $this->scope='.modal-content';
+                     $this->title = 'Add new';
+                     $this->validate();
+                $browser->clickAtXPath('/html/body/div[8]/div[2]/div/div/div[3]/a[2]/span');
+               
+                $browser->pause(300)
                     ->clickAtXPath('/html/body/div[2]/div[3]/div/div[2]/div/div[3]/div/div/div[2]/span/div[2]/div[2]/table/tbody/tr[1]/td[9]/a')
                     ->screenshot($dir . 'Edit');
+                     $this->title = 'Edit';
+                     $this->scope='.main-container';
+                     $this->validate();
 
                 //lop throgh the all tabs.
                 $tabs = $browser->elements('.profile-usermenu  li');
                 for ($i = 1; $i < (sizeof($tabs)); $i++) {
                     $tabs[$i]->click();
+                    $this->scope='.profile-content';
+                    $this->title = 'tab-' . $i;
+                    $this->validate();
                     $browser->screenshot($dir . 'tab-' . $i);
                     //update element position.
                     $tabs = $browser->elements('.profile-usermenu  li');
@@ -209,6 +248,7 @@ class PageTest extends DuskTestCase
         $this->browse(
             function ($browser) {
                 $dir = 'adac-' . date("Y-m-d-H") . '/Setting/Pages/';
+                $this->dir = $dir;
                 $browser->visit('/');
                 $browser->clickLink('Trainingsangebote')
                     ->pause(1000)
@@ -216,13 +256,20 @@ class PageTest extends DuskTestCase
                     ->pause(100)
                     ->clickLink('Firma')
                     ->screenshot($dir . 'Firma');
-                    $browser->assertDontSee('t::');
+                    $this->scope='.main-nav-left';
+                    $this->title = 'Firma';
+                    $this->validate();
+
                 //click through all pages.
                 $pages = $browser->elements('.paginate_button  a');
                 for ($i = 0; $i < (sizeof($pages)) - 1; $i++) {
                     if ($i > 1) {
                         $pages[$i]->click();
+                        $this->title = 'page-' . $i;
+                        $this->scope='.main-container';
+                        $this->validate();
                         $browser->screenshot($dir . 'page-' . $i);
+
                         //update element position.
                         $pages = $browser->elements('.paginate_button  a');
                     }
@@ -234,6 +281,9 @@ class PageTest extends DuskTestCase
                 foreach ($tabs as $tab) {
                     if ($j > 1) {
                         $tab->click();
+                        $this->scope='.main-container';
+                        $this->title = $tab->getAttribute('innerHTML');
+                        $this->validate();
                         $browser->screenshot($dir . 'tab-' . $j . '-' . $tab->getAttribute('innerHTML'));
                     }
                     $j++;
@@ -244,7 +294,7 @@ class PageTest extends DuskTestCase
 
     /**
      * @group All
-     * @group Setting
+     * @group Settings
      */
     public function testSettingUser()
     {
@@ -252,6 +302,7 @@ class PageTest extends DuskTestCase
         $this->browse(
             function ($browser) {
                 $dir = 'adac-' . date("Y-m-d-H") . '/Setting/user/';
+                $this->dir = $dir;
                 $browser->visit('/');
                 $browser->clickLink('Trainingsangebote')
                     ->pause(1000)
@@ -259,6 +310,9 @@ class PageTest extends DuskTestCase
                     ->pause(100)
                     ->clickLink('Nutzer')
                     ->screenshot($dir . 'Nutzer');
+                    $this->scope='.main-nav-left';
+                    $this->title = 'Nutzer';
+                    $this->validate();
 
                 //click through all pages.
                 $pages = $browser->elements('.paginate_button  a');
@@ -266,6 +320,9 @@ class PageTest extends DuskTestCase
                     if ($i > 1) {
                         $pages[$i]->click();
                         $browser->screenshot($dir . 'page-' . $i);
+                        $this->scope='.main-container';
+                        $this->title = 'page-' . $i;
+                        $this->validate();
                         //update element position.
                         $pages = $browser->elements('.paginate_button  a');
                     }
@@ -277,10 +334,46 @@ class PageTest extends DuskTestCase
                 foreach ($tabs as $tab) {
                     if ($j > 1 && $j < ((sizeof($tabs)) - 3)) {
                         $tab->click();
-                        $browser->screenshot($dir . 'tab-' . $j . '-');
+                        $browser->screenshot($dir .  'tab-' . $j);
+                        $this->scope='.main-container';
+                        $this->title = 'tab-' . $j . '-';
+                        $this->validate();
                     }
                     $j++;
                 }
+            }
+        );
+    }
+
+         /**
+          */
+    public function validate()
+    {
+      
+        $this->browse(
+            function ($browser) {
+                $error_dir = 'adac-' . date("Y-m-d-H") . '/Error/';
+            
+                try {
+                    $browser->with(
+                        $this->scope, function ($table) {
+                            $table->assertDontSee('sql')
+                                ->assertDontSee('t::')
+                                ->assertDontSee('angelcore/class.core.php')
+                                ->assertDontSee(':core::getBackTrace')
+                                ->assertDontSee(':core::erro')
+                                ->assertDontSee('Die aufgerufene Seite konnte leider nicht gefunden werden.')
+                                ->assertDontSee('php');    
+                        }
+                    );
+                } catch(\Exception $e) {
+                    //return false;
+                    $url = $browser->driver->getCurrentURL();
+                    $browser->screenshot($error_dir  . preg_replace('/[^A-Za-z0-9\-]/', '', $this->title));
+                     return false;
+
+                }
+             
             }
         );
     }

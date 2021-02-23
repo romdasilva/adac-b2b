@@ -126,7 +126,7 @@ class MainController extends BaseController
             array_push($a_dir, $a_directory);
         }
 
-        $path = public_path('screenshot/adac-2021-02-17-16/');
+        $path = public_path('screenshot/'.end($a_dir));
         $directories = glob($path . '/*', GLOB_ONLYDIR);
 
         $dir = array();

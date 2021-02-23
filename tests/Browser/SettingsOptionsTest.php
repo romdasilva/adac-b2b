@@ -8,7 +8,8 @@ use Tests\DuskTestCase;
 
 class SettingsOptionsTest extends DuskTestCase
 {
-
+    private $title = "";
+    private $scope="";
     public function Login()
     {
         $Logging_user = new LoginTest;
@@ -31,18 +32,26 @@ class SettingsOptionsTest extends DuskTestCase
                     ->clickLink('Einstellungen / Optionen')
                     ->pause(500)
                     ->clickLink('Profil')
-                    ->screenshot($dir . 'Profil')
-                    ->pause(500)
-                    ->click('.fa-plus')
-                    ->pause(1500)
-                    ->screenshot($dir . 'Add new item')
-                    ->click('.btn-warning')
-                    ->pause(500)
-                    ->click('.fa-pencil')
-                    ->pause(1500)
-                    ->screenshot($dir . 'Edit item')
-                    ->click('.btn-warning')
-                    ->pause(1500);
+                    ->screenshot($dir . 'Profil');
+                    $this->title='Profil';
+                    $this->scope='.main-nav-left';
+                    $this->validate();
+                    $browser->pause(500)
+                        ->click('.fa-plus')
+                        ->pause(1500)
+                        ->screenshot($dir . 'Add new item');
+                        $this->title='Add new item';
+                        $this->scope='.modal-content';
+                        $this->validate();
+                        $browser->click('.btn-warning')
+                        ->pause(500)
+                        ->click('.fa-pencil')
+                        ->pause(1500)
+                        ->screenshot($dir . 'Edit item');
+
+                        $browser->click('.btn-warning')
+                        ->pause(1500);
+
 
                 $tabs = $browser->elements('.profile-usermenu a');
                 //click on all tabs.
@@ -50,6 +59,9 @@ class SettingsOptionsTest extends DuskTestCase
                     $tabs[$j]->click();
                     $browser->pause(500)
                         ->screenshot($dir . 'tab-' . $j);
+                        $this->title='tab-' . $j;
+                        $this->scope='.profile-content';
+                        $this->validate();
                     $tabs = $browser->elements('.profile-usermenu a');
                 }
             }
@@ -74,13 +86,18 @@ class SettingsOptionsTest extends DuskTestCase
                     ->pause(500)
                     ->clickLink('Mitarbeiter')
                     ->screenshot($dir . 'Mitarbeiter');
-
+                    $this->title='Mitarbeiter';
+                    $this->scope='.main-nav-left';
+                    $this->validate();
                 //click through all pages.
                 $pages = $browser->elements('.paginate_button  a');
                 for ($i = 0; $i < (sizeof($pages)) - 1; $i++) {
                     if ($i > 1) {
                         $pages[$i]->click();
                         $browser->screenshot($dir . 'page-' . $i);
+                        $this->title='page-' . $i;
+                        $this->scope='.main-container';
+                        $this->validate();
                         //update element position.
                         $pages = $browser->elements('.paginate_button  a');
                     }
@@ -108,6 +125,9 @@ class SettingsOptionsTest extends DuskTestCase
                     $tabs[$j]->click();
                     $browser->pause(500)
                         ->screenshot($dir . 'tab-' . $j);
+                        $this->title='tab-' . $j;
+                        $this->scope='.profile-content';
+                        $this->validate();
                     $tabs = $browser->elements('.profile-usermenu a');
                 }
             }
@@ -133,20 +153,29 @@ class SettingsOptionsTest extends DuskTestCase
                     ->screenshot($dir . 'Trainingsverwaltung')
                     ->pause(500);
 
+                    $this->title='Trainingsverwaltung';
+                    $this->scope='.main-nav-left';
+                    $this->validate();
                 //click through all pages.
                 $pages = $browser->elements('.paginate_button  a');
                 for ($i = 0; $i < (sizeof($pages)) - 1; $i++) {
                     if ($i > 1) {
                         $pages[$i]->click();
                         $browser->screenshot($dir . 'page-' . $i);
+                        $this->title='page-' . $i;
+                        $this->scope='.main-container';
+                        $this->validate();
                         //update element position.
                         $pages = $browser->elements('.paginate_button  a');
                     }
                 }
                 $browser->click('.fa-plus')
                     ->pause(1500)
-                    ->screenshot($dir . 'Add new item')
-                    ->pause(500)
+                    ->screenshot($dir . 'Add new item');
+                    $this->title='Add new item';
+                    $this->scope='.modal-content';
+                    $this->validate();
+                    $browser->pause(500)
                     ->click('.red-intense')
                     ->pause(500)
                     ->click('.fa-pencil')
@@ -187,13 +216,18 @@ class SettingsOptionsTest extends DuskTestCase
                     ->pause(500)
                     ->select('#location')
                     ->screenshot($dir . 'Selection');
-
+                    $this->title='Selection';
+                    $this->scope='.main-nav-left';
+                    $this->validate();
                 $tabs = $browser->elements('.profile-usermenu li');
                 //click on all tabs.
                 for ($j = 0; $j < sizeof($tabs); $j++) {
                     $tabs[$j]->click();
                     $browser->pause(900)
                         ->screenshot($dir . 'tab-' . $j);
+                        $this->title='tab-' . $j;
+                        $this->scope='.profile-content';
+                        $this->validate();
                     $tabs = $browser->elements('.profile-usermenu li');
                 }
             }
@@ -220,13 +254,18 @@ class SettingsOptionsTest extends DuskTestCase
                     ->pause(500)
                     ->select('#location')
                     ->screenshot($dir . 'Selection');
-
+                    $this->title='Selection';
+                    $this->scope='.main-nav-left';
+                    $this->validate();
                 $tabs = $browser->elements('.profile-usermenu li');
                 //click on all tabs.
                 for ($j = 0; $j < sizeof($tabs); $j++) {
                     $tabs[$j]->click();
                     $browser->pause(900)
                         ->screenshot($dir . 'tab-' . $j);
+                        $this->title='tab-' . $j;
+                        $this->scope='.profile-content';
+                        $this->validate();
                     $tabs = $browser->elements('.profile-usermenu li');
                 }
             }
@@ -251,25 +290,34 @@ class SettingsOptionsTest extends DuskTestCase
                     ->clickLink('Catering')
                     ->screenshot($dir . 'Catering')
                     ->pause(500);
-              
+                    $this->title='Catering';
+                    $this->scope='.main-nav-left';
+                    $this->validate();
                 //click through all pages.
                 $pages = $browser->elements('.paginate_button  a');
                 for ($i = 0; $i < (sizeof($pages)) - 1; $i++) {
                     if ($i > 1) {
                         $pages[$i]->click();
                         $browser->screenshot($dir . 'page-' . $i);
+                        $this->title='page-' . $i;
+                        $this->scope='.main-container';
+                        $this->validate();
                         //update element position.
                         $pages = $browser->elements('.paginate_button  a');
                     }
                 }
 
+                //should check later
                 $browser->pause(500)
                     ->click('.fa-plus')
                     ->pause(1500)
-                    ->screenshot($dir . 'Add new item')
-                    ->click('.btn-default')
+                    ->screenshot($dir . 'Add new item');
+                    $this->title='Add new item';
+                    $this->scope='.modal-content';
+                    $this->validate();
+                    $browser->click('.btn-default')
                     ->pause(500)
-                    ->click('.fa-plus')
+                    ->click('.fa-pencil')
                     ->pause(1500)
                     ->screenshot($dir . 'Edit');
             }
@@ -294,13 +342,18 @@ class SettingsOptionsTest extends DuskTestCase
                     ->clickLink('t::page_names::customer_insuranceassociation')
                     ->screenshot($dir . 'CustomerInsuranceAssociation')
                     ->pause(500);
-              
+                    $this->title='CustomerInsuranceAssociation';
+                    $this->scope='.main-nav-left';
+                    $this->validate();
                 //click through all pages.
                 $pages = $browser->elements('.paginate_button  a');
                 for ($i = 0; $i < (sizeof($pages)) - 1; $i++) {
                     if ($i > 1) {
                         $pages[$i]->click();
                         $browser->screenshot($dir . 'page-' . $i);
+                        $this->title='page-' . $i;
+                        $this->scope='.main-container';
+                        $this->validate();
                         //update element position.
                         $pages = $browser->elements('.paginate_button  a');
                     }
@@ -309,10 +362,13 @@ class SettingsOptionsTest extends DuskTestCase
                 $browser->pause(500)
                     ->click('.fa-plus')
                     ->pause(1500)
-                    ->screenshot($dir . 'Add new item')
-                    ->click('.btn-warning')
+                    ->screenshot($dir . 'Add new item');
+                    $this->title='Add new item';
+                    $this->scope='.modal-content';
+                    $this->validate();
+                    $browser->click('.btn-warning')
                     ->pause(500)
-                    ->click('.fa-plus')
+                    ->click('.fa-pencil')
                     ->pause(1500)
                     ->screenshot($dir . 'Edit');
             }
@@ -338,13 +394,18 @@ class SettingsOptionsTest extends DuskTestCase
                     ->clickLink('Standorte')
                     ->screenshot($dir . 'Standorte')
                     ->pause(500);
-              
+                    $this->title='Standorte';
+                    $this->scope='.main-nav-left';
+                    $this->validate();
                 //click through all pages.
                 $pages = $browser->elements('.paginate_button  a');
                 for ($i = 0; $i < (sizeof($pages)) - 1; $i++) {
                     if ($i > 1) {
                         $pages[$i]->click();
                         $browser->screenshot($dir . 'page-' . $i);
+                        $this->title='page-' . $i;
+                        $this->scope='.main-container';
+                        $this->validate();
                         //update element position.
                         $pages = $browser->elements('.paginate_button  a');
                     }
@@ -354,10 +415,13 @@ class SettingsOptionsTest extends DuskTestCase
                     ->click('.fa-plus')
                     ->pause(1500)
                     ->resize(1920, 4000)
-                    ->screenshot($dir . 'Add new item')
-                    ->click('.btn-warning')
+                    ->screenshot($dir . 'Add new item');
+                    $this->title='Add new item';
+                    $this->scope='.modal-content';
+                    $this->validate();
+                    $browser->click('.btn-warning')
                     ->pause(500)
-                    ->click('.fa-plus')
+                    ->click('.fa-pencil')
                     ->pause(1500)
                     ->screenshot($dir . 'Edit');
             }
@@ -383,13 +447,18 @@ class SettingsOptionsTest extends DuskTestCase
                     ->clickLink('eMail Templates')
                     ->screenshot($dir . 'Standorte')
                     ->pause(500);
-              
+                    $this->title='Standorte';
+                    $this->scope='.main-nav-left';
+                    $this->validate();
                 //click through all pages.
                 $pages = $browser->elements('.paginate_button  a');
                 for ($i = 0; $i < (sizeof($pages)) - 1; $i++) {
                     if ($i > 1) {
                         $pages[$i]->click();
                         $browser->screenshot($dir . 'page-' . $i);
+                        $this->title='page-' . $i;
+                        $this->scope='.main-container';
+                        $this->validate();
                         //update element position.
                         $pages = $browser->elements('.paginate_button  a');
                     }
@@ -398,9 +467,38 @@ class SettingsOptionsTest extends DuskTestCase
             }
         );
     }
+    /**
+     */
+    public function validate()
+    {
+      
+        $this->browse(
+            function ($browser) {
+                $error_dir = 'adac-' . date("Y-m-d-H") . '/Error/';
+            
+                try {
+                    $browser->with(
+                        $this->scope, function ($table) {
+                            $table->assertDontSee('sql')
+                                ->assertDontSee('t::')
+                                ->assertDontSee('angelcore/class.core.php')
+                                ->assertDontSee(':core::getBackTrace')
+                                ->assertDontSee(':core::erro')
+                                ->assertDontSee('Die aufgerufene Seite konnte leider nicht gefunden werden.')
+                                ->assertDontSee('php');    
+                        }
+                    );
+                } catch(\Exception $e) {
+                    //return false;
+                    $url = $browser->driver->getCurrentURL();
+                    $browser->screenshot($error_dir  . preg_replace('/[^A-Za-z0-9\-]/', '', $this->title));
+                     return false;
 
-
-
+                }
+             
+            }
+        );
+    }
 
     
 }

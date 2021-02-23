@@ -1,15 +1,21 @@
 <?php
 
 namespace Tests;
-
+use Laravel\Dusk;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Laravel\Dusk\TestCase as BaseTestCase;
+use Laravel\Dusk\Concerns\ProvidesBrowser;
+use Exception;
+use Illuminate\Foundation\Testing\TestCase as FoundationTestCase;
+use Laravel\Dusk\Chrome\SupportsChrome;
+
+
 
 abstract class DuskTestCase extends BaseTestCase
 {
-    use CreatesApplication;
+    use ProvidesBrowser,  CreatesApplication;
 
     /**
      * Prepare for Dusk test execution.
@@ -19,6 +25,7 @@ abstract class DuskTestCase extends BaseTestCase
      */
     public static function prepare()
     {
+
         if (! static::runningInSail()) {
             static::startChromeDriver();
         }
@@ -44,4 +51,7 @@ abstract class DuskTestCase extends BaseTestCase
             )
         );
     }
+
+ 
+
 }

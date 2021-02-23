@@ -52,6 +52,11 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
+        'screenshots' => [
+            'driver' => 'local',
+            'root' => storage_path('/tests/Browser'),
+        ],
+
     ],
 
     /*
