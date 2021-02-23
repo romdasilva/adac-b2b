@@ -5,18 +5,12 @@ chrome driver should be same version as browser version.
 php artisan dusk:chrome-driver 86
 
 Runing test
+
+for runing specific test.
 php artisan dusk --filter testTrainingLocations
-php artisan dusk --filter testTrainingLocations
-
-
-erhobene_hände
-
-
-
-
-
-10:12 Uhr
+for runinng group test
 php artisan dusk --group All
+
 This README would normally document whatever steps are necessary to get your application up and running.
 
 ### What is this repository for? ###
