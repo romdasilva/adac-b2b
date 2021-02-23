@@ -48,10 +48,11 @@ class SettingsOptionsTest extends DuskTestCase
                         ->click('.fa-pencil')
                         ->pause(1500)
                         ->screenshot($dir . 'Edit item');
-
+                        $this->title='Add new item';
+                        $this->scope='.modal-content';
+                        $this->validate();
                         $browser->click('.btn-warning')
                         ->pause(1500);
-
 
                 $tabs = $browser->elements('.profile-usermenu a');
                 //click on all tabs.
@@ -103,12 +104,14 @@ class SettingsOptionsTest extends DuskTestCase
                     }
                 }
 
-                // go to the edit page
+                //Go to the edit page
                 $browser->click('.fa-pencil')
                     ->pause(1500)
                     ->screenshot($dir . 'Edit item')
                     ->pause(1500);
-
+                    $this->title='Edit item';
+                    $this->scope='.main-container';
+                    $this->validate();
 
                 $top_tabs = $browser->elements('.wTabs a');
                 //click on all tabs.
@@ -116,9 +119,13 @@ class SettingsOptionsTest extends DuskTestCase
                     $top_tabs[$j]->click();
                     $browser->pause(500)
                         ->screenshot($dir . 'top-tab-' . $j);
+                        $this->title='top-tab-' . $j;
+                        $this->scope='.profile-content';
+                        $this->validate();
                     $top_tabs = $browser->elements('.wTabs a');
                 }
 
+                //profile-content
                 $tabs = $browser->elements('.profile-usermenu a');
                 //click on all tabs.
                 for ($j = 0; $j < sizeof($tabs); $j++) {
@@ -152,7 +159,6 @@ class SettingsOptionsTest extends DuskTestCase
                     ->clickLink('Trainingsverwaltung')
                     ->screenshot($dir . 'Trainingsverwaltung')
                     ->pause(500);
-
                     $this->title='Trainingsverwaltung';
                     $this->scope='.main-nav-left';
                     $this->validate();
@@ -183,6 +189,9 @@ class SettingsOptionsTest extends DuskTestCase
                     ->resize(1920, 3000)
                     ->screenshot($dir . 'Edit item')
                     ->pause(500);
+                    $this->title='Edit item';
+                    $this->scope='.main-container';
+                    $this->validate();
 
                 $top_tabs = $browser->elements('.wTabs a');
                 //click on all tabs.
@@ -190,6 +199,9 @@ class SettingsOptionsTest extends DuskTestCase
                     $top_tabs[$j]->click();
                     $browser->pause(500)
                         ->screenshot($dir . 'top-tab-' . $j);
+                        $this->title='top-tab-' . $j;
+                        $this->scope='.profile-content';
+                        $this->validate();
                     $top_tabs = $browser->elements('.wTabs a');
                 }
             }
@@ -320,6 +332,9 @@ class SettingsOptionsTest extends DuskTestCase
                     ->click('.fa-pencil')
                     ->pause(1500)
                     ->screenshot($dir . 'Edit');
+                    $this->title='Edit';
+                    $this->scope='.main-container';
+                    $this->validate();
             }
         );
     }
@@ -371,6 +386,9 @@ class SettingsOptionsTest extends DuskTestCase
                     ->click('.fa-pencil')
                     ->pause(1500)
                     ->screenshot($dir . 'Edit');
+                    $this->title='Edit';
+                    $this->scope='.modal-content';
+                    $this->validate();
             }
         );
     }
@@ -424,6 +442,9 @@ class SettingsOptionsTest extends DuskTestCase
                     ->click('.fa-pencil')
                     ->pause(1500)
                     ->screenshot($dir . 'Edit');
+                    $this->title='Edit';
+                    $this->scope='.main-container';
+                    $this->validate();
             }
         );
     }

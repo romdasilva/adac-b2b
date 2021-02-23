@@ -19,18 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/main', 'App\Http\Controllers\MainController@show');
 Route::get('/', 'App\Http\Controllers\MainController@homePage');
-Route::resource('/posts', 'MainController');
-
 Route::post('/result', 'App\Http\Controllers\MainController@result');
 Route::patch('/result',[
     'as' => 'result',
     'uses' => 'MainController@result'
 ]);
-Route::post('/zipdownload', 'App\Http\Controllers\MainController@zipDownload');
-
-Route::patch('/zipdownload',[
-    'as' => 'zipDownload',
-    'uses' => 'MainController@zipDownload'
-]);
-
-
