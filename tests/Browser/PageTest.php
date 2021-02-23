@@ -19,7 +19,7 @@ class PageTest extends DuskTestCase
 
 
     /**  
-     * @group Alls
+     * @group All
      * @group TrainingLocations
      */
     public function testTrainingLocations()
@@ -236,8 +236,6 @@ class PageTest extends DuskTestCase
             }
         );
     }
-
-
     /**
      * @group All
      * @group Settings
@@ -269,7 +267,6 @@ class PageTest extends DuskTestCase
                         $this->scope='.main-container';
                         $this->validate();
                         $browser->screenshot($dir . 'page-' . $i);
-
                         //update element position.
                         $pages = $browser->elements('.paginate_button  a');
                     }
@@ -349,11 +346,9 @@ class PageTest extends DuskTestCase
           */
     public function validate()
     {
-      
         $this->browse(
             function ($browser) {
                 $error_dir = 'adac-' . date("Y-m-d-H") . '/Error/';
-            
                 try {
                     $browser->with(
                         $this->scope, function ($table) {
@@ -367,13 +362,9 @@ class PageTest extends DuskTestCase
                         }
                     );
                 } catch(\Exception $e) {
-                    //return false;
                     $url = $browser->driver->getCurrentURL();
-                    $browser->screenshot($error_dir  . preg_replace('/[^A-Za-z0-9\-]/', '', $this->title));
-                     return false;
-
+                    $browser->screenshot($error_dir  .  $this->title);
                 }
-             
             }
         );
     }

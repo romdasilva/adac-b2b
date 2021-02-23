@@ -3,14 +3,14 @@
 # Instalation #
 * install dusk on laravel
 php artisan dusk:install
-* to run test 
+* To run test 
 * Chrome driver should be same version as browser version.
 php artisan dusk:chrome-driver 86
 
 # Runing test #
 * To run all tests.
 php artisan dusk
-* To run specifictest.
+* To run specific test.
 php artisan dusk --filter testTrainingLocations
 * To run group test.
 php artisan dusk --group All

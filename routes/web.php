@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('home');
 // });
 
-Route::get('/main', 'App\Http\Controllers\MainController@show');
+// Route::get('/main', 'App\Http\Controllers\MainController@show');
 Route::get('/', 'App\Http\Controllers\MainController@homePage');
 Route::post('/result', 'App\Http\Controllers\MainController@result');
 Route::patch('/result',[

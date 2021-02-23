@@ -44,15 +44,15 @@ class SettingsOptionsTest extends DuskTestCase
                         $this->scope='.modal-content';
                         $this->validate();
                         $browser->click('.btn-warning')
-                        ->pause(500)
-                        ->click('.fa-pencil')
-                        ->pause(1500)
-                        ->screenshot($dir . 'Edit item');
+                            ->pause(500)
+                            ->click('.fa-pencil')
+                            ->pause(1500)
+                            ->screenshot($dir . 'Edit item');
                         $this->title='Add new item';
                         $this->scope='.modal-content';
                         $this->validate();
                         $browser->click('.btn-warning')
-                        ->pause(1500);
+                            ->pause(1500);
 
                 $tabs = $browser->elements('.profile-usermenu a');
                 //click on all tabs.
@@ -182,13 +182,13 @@ class SettingsOptionsTest extends DuskTestCase
                     $this->scope='.modal-content';
                     $this->validate();
                     $browser->pause(500)
-                    ->click('.red-intense')
-                    ->pause(500)
-                    ->click('.fa-pencil')
-                    ->pause(1500)
-                    ->resize(1920, 3000)
-                    ->screenshot($dir . 'Edit item')
-                    ->pause(500);
+                        ->click('.red-intense')
+                        ->pause(500)
+                        ->click('.fa-pencil')
+                        ->pause(1500)
+                        ->resize(1920, 3000)
+                        ->screenshot($dir . 'Edit item')
+                        ->pause(500);
                     $this->title='Edit item';
                     $this->scope='.main-container';
                     $this->validate();
@@ -200,7 +200,7 @@ class SettingsOptionsTest extends DuskTestCase
                     $browser->pause(500)
                         ->screenshot($dir . 'top-tab-' . $j);
                         $this->title='top-tab-' . $j;
-                        $this->scope='.profile-content';
+                        $this->scope='.portlet-body';
                         $this->validate();
                     $top_tabs = $browser->elements('.wTabs a');
                 }
@@ -276,7 +276,7 @@ class SettingsOptionsTest extends DuskTestCase
                     $browser->pause(900)
                         ->screenshot($dir . 'tab-' . $j);
                         $this->title='tab-' . $j;
-                        $this->scope='.profile-content';
+                        $this->scope='#content-main';
                         $this->validate();
                     $tabs = $browser->elements('.profile-usermenu li');
                 }
@@ -328,10 +328,10 @@ class SettingsOptionsTest extends DuskTestCase
                     $this->scope='.modal-content';
                     $this->validate();
                     $browser->click('.btn-default')
-                    ->pause(500)
-                    ->click('.fa-pencil')
-                    ->pause(1500)
-                    ->screenshot($dir . 'Edit');
+                        ->pause(500)
+                        ->click('.fa-pencil')
+                        ->pause(1500)
+                        ->screenshot($dir . 'Edit');
                     $this->title='Edit';
                     $this->scope='.main-container';
                     $this->validate();
@@ -382,10 +382,10 @@ class SettingsOptionsTest extends DuskTestCase
                     $this->scope='.modal-content';
                     $this->validate();
                     $browser->click('.btn-warning')
-                    ->pause(500)
-                    ->click('.fa-pencil')
-                    ->pause(1500)
-                    ->screenshot($dir . 'Edit');
+                        ->pause(500)
+                        ->click('.fa-pencil')
+                        ->pause(1500)
+                        ->screenshot($dir . 'Edit');
                     $this->title='Edit';
                     $this->scope='.modal-content';
                     $this->validate();
@@ -438,10 +438,10 @@ class SettingsOptionsTest extends DuskTestCase
                     $this->scope='.modal-content';
                     $this->validate();
                     $browser->click('.btn-warning')
-                    ->pause(500)
-                    ->click('.fa-pencil')
-                    ->pause(1500)
-                    ->screenshot($dir . 'Edit');
+                        ->pause(500)
+                        ->click('.fa-pencil')
+                        ->pause(1500)
+                        ->screenshot($dir . 'Edit');
                     $this->title='Edit';
                     $this->scope='.main-container';
                     $this->validate();
@@ -489,6 +489,7 @@ class SettingsOptionsTest extends DuskTestCase
         );
     }
     /**
+     * The following function check if there is any error on the page
      */
     public function validate()
     {
@@ -510,11 +511,7 @@ class SettingsOptionsTest extends DuskTestCase
                         }
                     );
                 } catch(\Exception $e) {
-                    //return false;
-                    $url = $browser->driver->getCurrentURL();
-                    $browser->screenshot($error_dir  . preg_replace('/[^A-Za-z0-9\-]/', '', $this->title));
-                     return false;
-
+                     $browser->screenshot($error_dir  . $this->title);
                 }
              
             }

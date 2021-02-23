@@ -183,11 +183,7 @@ class MenuTest extends DuskTestCase
                         }
                     );
                 } catch(\Exception $e) {
-                    //return false;
-                    $url = $browser->driver->getCurrentURL();
                     $browser->screenshot($error_dir  . preg_replace('/[^A-Za-z0-9\-]/', '', $this->title));
-                     return false;
-
                 }
              
             }
